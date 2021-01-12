@@ -256,6 +256,7 @@ public abstract class BaseFragment extends Fragment {
         }
         recyclerView.setAdapter(null);
         recyclerView.setAdapter(lotteryAdapter);
+        swipeRefreshLayout.setRefreshing(true);
         new LotteryTask(getContext(), new AsyncResponse() {
             @Override
             public void processFinish(Object output) {

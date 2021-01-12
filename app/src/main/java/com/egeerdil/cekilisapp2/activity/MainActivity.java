@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
         passwordTextView = findViewById(R.id.password1);
         signup = findViewById(R.id.signUp);
         blurImageView = (BlurImageView)findViewById(R.id.BlurImageView);
-        blurImageView.setBlur(3);
     }
 
     @Override

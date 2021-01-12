@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.egeerdil.cekilisapp2.R;
 import com.egeerdil.cekilisapp2.db.FetchLotteries;
 import com.egeerdil.cekilisapp2.model.Lottery;
 
@@ -34,11 +35,6 @@ public class LotteryTask extends AsyncTask<Object, Void, Object> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        loadingDialog = new ProgressDialog(context);
-        loadingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        loadingDialog.setCancelable(false);
-        loadingDialog.setIndeterminate(false);
-        showLoadingDialog("Yükleniyor...");
     }
 
     public void showLoadingDialog(String message) {
@@ -59,8 +55,6 @@ public class LotteryTask extends AsyncTask<Object, Void, Object> {
 
     @Override
     protected void onPostExecute(Object result) {
-        if(loadingDialog != null && loadingDialog.isShowing())
-            loadingDialog.dismiss();
         delegate.processFinish(lotteryObject);
     }
 
