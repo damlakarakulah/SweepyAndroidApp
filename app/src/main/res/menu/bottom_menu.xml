@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:title="Anasayfa"
+        android:icon="@drawable/icon_home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_cosmetics"
+        android:enabled="true"
+        android:title="Kozmetik"
+        android:icon="@drawable/icon_cosmetic"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_technology"
+        android:enabled="true"
+        android:title="Teknoloji"
+        android:icon="@drawable/icon_technology"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_fashion"
+        android:enabled="true"
+        android:title="Moda"
+        android:icon="@drawable/icon_fashion"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_other"
+        android:enabled="true"
+        android:title="Diğer"
+        android:icon="@drawable/icon_other"
+        app:showAsAction="ifRoom" />
+
+</menu>

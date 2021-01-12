@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sweepy</string>
+    <string name="signup"><u>Yeni hesap oluştur!</u></string>
+    <string name="login"><u>Giriş sayfasına dön</u></string>
+</resources>
