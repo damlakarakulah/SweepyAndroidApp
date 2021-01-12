@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "904722952867",
+    "project_id": "sweepy-a7578",
+    "storage_bucket": "sweepy-a7578.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904722952867:android:9a7622e3bf970a0ee28516",
+        "android_client_info": {
+          "package_name": "com.egeerdil.cekilisapp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904722952867-27psa7plneu2k5fdu0i760kpg712ml7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClT9mfZPEFy6lXBNzBH1PSdKD0dmx2_cs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904722952867-27psa7plneu2k5fdu0i760kpg712ml7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
