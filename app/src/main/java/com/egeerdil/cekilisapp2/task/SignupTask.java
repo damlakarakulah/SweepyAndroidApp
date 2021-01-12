@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.egeerdil.cekilisapp2.R;
 import com.egeerdil.cekilisapp2.db.FetchLotteries;
 import com.egeerdil.cekilisapp2.db.Login;
 import com.egeerdil.cekilisapp2.db.Signup;
@@ -39,8 +40,8 @@ public class SignupTask extends AsyncTask<Object, Void, Object> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        loadingDialog = new ProgressDialog(context);
-        loadingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        loadingDialog = new ProgressDialog(context, R.style.ProgressBar);
+        //loadingDialog.setProgressStyle(R.style.ProgressBar);
         loadingDialog.setCancelable(false);
         loadingDialog.setIndeterminate(false);
         showLoadingDialog("Kayıt oluşturuluyor...");

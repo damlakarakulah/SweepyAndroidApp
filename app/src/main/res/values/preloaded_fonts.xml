@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/abhaya_libre_medium</item>
+        <item>@font/allerta</item>
+        <item>@font/amaranth</item>
+        <item>@font/andada</item>
+        <item>@font/bitter</item>
+        <item>@font/cambay</item>
+        <item>@font/droid_serif</item>
+        <item>@font/duru_sans</item>
+        <item>@font/rubik</item>
+        <item>@font/sintony</item>
+        <item>@font/sura</item>
+    </array>
+</resources>
