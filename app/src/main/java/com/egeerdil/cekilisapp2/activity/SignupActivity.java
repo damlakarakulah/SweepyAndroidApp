@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,12 +35,15 @@ public class SignupActivity extends AppCompatActivity {
     private String username = "";
     private String email = "";
     private  String password = "";
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         context = SignupActivity.this;
+        sharedPref = getSharedPreferences("MySharedPref",
+                MODE_PRIVATE);
         setView();
 
     }
@@ -119,38 +123,48 @@ public class SignupActivity extends AppCompatActivity {
                 if(username.length() == 0 || email.length() == 0 || password.length() == 0)
                     Toast.makeText(context, "Tüm alanları doldurduğunuzdan emin olun", Toast.LENGTH_LONG).show();
                 else {
-                    SignupTask signupTask = new SignupTask(context, new AsyncResponse() {
-                        @Override
-                        public void processFinish(Object output) {
-                            JSONObject signupObject = (JSONObject) output;
-                            if(signupObject == null){
-                                if(!ServiceConfig.getConnectivityStatusBoolean(context)){
-                                    Toast.makeText(context,"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                            }
-                            String message = null;
-                            int status = 0;
-                            try {
-                                message = signupObject.has("message") ? signupObject.getString("message") : "";
-                                status = signupObject.has("status") ? signupObject.getInt("status") : 0;
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            if(message != null && !message.equals("")) {
-                                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                            }
-                            else {
-                                Toast.makeText(context, "Kullanıcı kaydedilirken bir hata oluştu.", Toast.LENGTH_LONG).show();
-                            }
-
-                        }
-                    },username, email, password);
-                    signupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    SignupTask();
                 }
             }
         });
+    }
+
+    private void SignupTask() {
+        SignupTask signupTask = new SignupTask(context, new AsyncResponse() {
+            @Override
+            public void processFinish(Object output) {
+                JSONObject signupObject = (JSONObject) output;
+                if(signupObject == null){
+                    if(!ServiceConfig.getConnectivityStatusBoolean(context)){
+                        Toast.makeText(context,"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+                String message = null;
+                int status = 0;
+                try {
+                    message = signupObject.has("message") ? signupObject.getString("message") : "";
+                    status = signupObject.has("status") ? signupObject.getInt("status") : 0;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(message != null && !message.equals("")) {
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(context, "Kullanıcı kaydedilirken bir hata oluştu.", Toast.LENGTH_LONG).show();
+                }
+
+                if(status == 1){
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("username", username);
+                    editor.apply();
+                }
+
+            }
+        },username, email, password);
+        signupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override

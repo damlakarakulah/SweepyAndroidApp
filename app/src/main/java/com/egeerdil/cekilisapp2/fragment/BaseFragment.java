@@ -2,7 +2,9 @@ package com.egeerdil.cekilisapp2.fragment;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,6 +45,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public abstract class BaseFragment extends Fragment {
 
     protected FragmentManager fragmentManager;
@@ -68,6 +72,7 @@ public abstract class BaseFragment extends Fragment {
     private TextView email;
     private JSONArray lotteryArray;
     private List<Lottery> lotteryList;
+    private SharedPreferences sharedPref;
 
 
     public BaseFragment(String type, String headerName){
@@ -84,6 +89,9 @@ public abstract class BaseFragment extends Fragment {
         getFragmentActivity();
 
         onViewCreated(view, savedInstanceState);
+        sharedPref = getActivity().getSharedPreferences("MySharedPref",
+                MODE_PRIVATE);
+
 
         return view;
 
@@ -168,6 +176,10 @@ public abstract class BaseFragment extends Fragment {
                 logoutButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("password", "");
+                        editor.apply();
+
                         Intent mainIntent = new Intent(getActivity(), MainActivity.class);
                         getActivity().startActivity(mainIntent);
                         getActivity().finish();
