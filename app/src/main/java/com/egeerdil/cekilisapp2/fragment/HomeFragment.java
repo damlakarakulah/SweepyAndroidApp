@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.egeerdil.cekilisapp2.R;
 import com.egeerdil.cekilisapp2.SweepyApplication;
 import com.egeerdil.cekilisapp2.activity.StartActivity;
+import com.egeerdil.cekilisapp2.db.ServiceConfig;
 
 
 public class HomeFragment extends BaseFragment {
@@ -29,6 +30,9 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void onBackPressed() {
+        if(ServiceConfig.Token == null){
+            getActivity().recreate();
+        }
         System.exit(0);
     }
 }

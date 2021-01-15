@@ -12,7 +12,7 @@ public class Signup {
     private CallService callService;
     private Gson gson;
     private Context context;
-    private String username;
+    private String name;
     private String password;
     private String email;
     private String message = "";
@@ -20,13 +20,11 @@ public class Signup {
     private int status;
     private JSONObject signupObject;
 
-    public Signup(Context context, String username, String email, String password) {
+    public Signup(Context context, String name) {
         gson = new Gson();
         this.context = context;
         url = ServiceConfig.serviceURL;
-        this.username = username;
-        this.password = password;
-        this.email = email;
+        this.name = name;
     }
 
     public JSONObject signup() {
@@ -35,9 +33,7 @@ public class Signup {
         JSONObject params = new JSONObject();
 
         try {
-            params.put("username", username);
-            params.put("email", email);
-            params.put("password", password);
+            params.put("name", name);
             signupObject = callService.getService(params, "POST", url);
 
         } catch (JSONException e) {

@@ -84,7 +84,7 @@ public class Connection {
                             .url(httpGetURL.trim())
                             .addHeader("Content-Type", "application/json")
                             .addHeader("Accept", "application/json")
-                            .addHeader("authorization", ServiceConfig.Token)
+                            .addHeader("authorization", "Bearer " + ServiceConfig.Token)
                             .post(body)
                             .build();
                 }
@@ -116,7 +116,7 @@ public class Connection {
                         .url(httpGetURL.trim())
                         .addHeader("Content-Type", "application/json")
                         .addHeader("Accept", "application/json")
-                        .addHeader("authorization", ServiceConfig.Token)
+                        .addHeader("authorization", "Bearer " + ServiceConfig.Token)
                         //.put(body)
                         .build();
                 response = getOkHttpClient().newCall(request).execute();
@@ -182,7 +182,7 @@ public class Connection {
                         .url(httpGetURL.trim())
                         .addHeader("Content-Type", "application/json")
                         .addHeader("Accept", "application/json")
-                        .addHeader("authorization", ServiceConfig.Token)
+                        .addHeader("authorization", "Bearer " + ServiceConfig.Token)
                         .put(body)
                         .build();
 

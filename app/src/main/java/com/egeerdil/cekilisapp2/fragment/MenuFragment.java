@@ -7,14 +7,14 @@ import androidx.fragment.app.Fragment;
 import com.egeerdil.cekilisapp2.activity.StartActivity;
 
 
-public class ProfileFragment extends BaseFragment {
+public class MenuFragment extends BaseFragment {
 
-    public ProfileFragment() {
-        super("Profile", "Profil");
+    public MenuFragment() {
+        super("Menu", "Sweepy");
     }
 
     public static Fragment newInstance() {
-        return new ProfileFragment();
+        return new MenuFragment();
     }
 
     @Override

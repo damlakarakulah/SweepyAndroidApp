@@ -3,20 +3,29 @@ package com.egeerdil.cekilisapp2;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.animation.Animation;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.egeerdil.cekilisapp2.activity.LoginActivity;
+import com.egeerdil.cekilisapp2.activity.SignupActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SweepyApplication extends Application implements Application.ActivityLifecycleCallbacks {
     public static Activity mActivity;
     public static Context mContext;
-
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser =  firebaseAuth.getInstance().getCurrentUser();
         this.registerActivityLifecycleCallbacks(this);
 
     }
@@ -25,6 +34,20 @@ public class SweepyApplication extends Application implements Application.Activi
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
         mActivity = activity;
         mContext=SweepyApplication.this;
+
+        if(firebaseAuth == null || !firebaseUser.isEmailVerified()){
+            if (!firebaseUser.isEmailVerified()) {
+                try {
+                    Toast.makeText(mContext, "Lütfen e-postanızı doğrulayınız.", Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                return;
+            }
+            startActivity(new Intent(SweepyApplication.this, LoginActivity.class));
+        }
+
         this.registerActivityLifecycleCallbacks(this);
     }
 

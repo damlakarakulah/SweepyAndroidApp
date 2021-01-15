@@ -40,6 +40,8 @@ public class FetchUserInfo {
 
         try {
             JSONObject jsonObject = callService.getService(params, "GET", url);
+            if(jsonObject == null)
+                return null;
             userObject = jsonObject.getJSONObject("user");
             user = gson.fromJson(userObject.toString(), User.class);
             lotteryArray = userObject.getJSONArray("favs");
