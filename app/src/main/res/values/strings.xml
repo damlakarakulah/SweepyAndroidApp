@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Sweepy</string>
-    <string name="signup"><u>Yeni hesap oluştur!</u></string>
-    <string name="login"><u>Giriş sayfasına dön</u></string>
+    <string name="signup"><u>Yeni Hesap Oluştur!</u></string>
+    <string name="login"><u>Giriş Sayfasına Dön</u></string>
+    <string name="continueWithoutToken">Giriş Yapmadan Devam Et</string>
+    <string name="forgotPsssword"><u>Şifremi Unuttum</u></string>
+
+
 </resources>

@@ -19,7 +19,7 @@ import com.egeerdil.cekilisapp2.fragment.CosmeticsFragment;
 import com.egeerdil.cekilisapp2.fragment.FashionFragment;
 import com.egeerdil.cekilisapp2.fragment.HomeFragment;
 import com.egeerdil.cekilisapp2.fragment.OtherFragment;
-import com.egeerdil.cekilisapp2.fragment.ProfileFragment;
+import com.egeerdil.cekilisapp2.fragment.MenuFragment;
 import com.egeerdil.cekilisapp2.fragment.TechnologyFragment;
 import com.egeerdil.cekilisapp2.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

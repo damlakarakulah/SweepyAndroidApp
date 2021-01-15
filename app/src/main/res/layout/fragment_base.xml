@@ -35,12 +35,13 @@
                 android:theme="?attr/actionBarTheme" />
 
             <ImageButton
-                android:id="@+id/profile_button"
+                android:id="@+id/menu_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
+                android:layout_marginStart="10dp"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/profile"
+                app:srcCompat="@drawable/in_5"
                 tools:ignore="VectorDrawableCompat" />
 
             <ImageButton
@@ -49,7 +50,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:background="#00FFFFFF"
                 app:srcCompat="@drawable/saved_white"
                 tools:ignore="VectorDrawableCompat" />
@@ -67,7 +67,7 @@
         </FrameLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/profile_label"
+            android:id="@+id/menu_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp">
@@ -82,35 +82,151 @@
                 android:text="Hoşgeldin!" />
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/profile_layout"
+        <ScrollView
+            android:id="@+id/menu_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/username_profile"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/l_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/email_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+                <FrameLayout
+                    android:id="@+id/logMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/logout_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/logout"
-                tools:ignore="VectorDrawableCompat" />
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingBottom="4dp">
+
+                        <Button
+                            android:id="@+id/loginMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/border"
+                            android:text="GİRİŞ YAP"
+                            android:textColor="@color/pink"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/signinMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/border"
+                            android:text="HESAP OLUŞTUR"
+                            android:textColor="@color/pink"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/logoutMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/username_profile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/email_profile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textSize="18sp" />
+
+                        <ImageButton
+                            android:id="@+id/logout_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@android:color/transparent"
+                            app:srcCompat="@drawable/logout"
+                            tools:ignore="VectorDrawableCompat" />
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:gravity="center"
+                            android:text="Sweepy, çeşitli kurum veya kişilerin düzenlediği çekilişleri tek bir platformda görebilmen ve kolayca ulaşabilmen için tasarlandı. Kategorilere göre filtrelediğimiz çekilişleri favorilerine ekle ve kendi listeni oluştur. Çekilişlere ulaşmak hiç bu kadar kolay olmamıştı!"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp
+">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Bize ulaş"
+                            android:textColor="@color/pink"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="destek@sweepy.com"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

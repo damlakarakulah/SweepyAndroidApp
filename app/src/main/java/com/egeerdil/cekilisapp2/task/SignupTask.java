@@ -20,16 +20,14 @@ public class SignupTask extends AsyncTask<Object, Void, Object> {
     private FetchLotteries fetchLotteries;
     private String type;
     private ProgressDialog loadingDialog;
-    private String username;
+    private String name;
     private String password;
     private JSONObject signup;
     private String token = "";
 
-    public SignupTask(Context context, AsyncResponse asyncResponse, String username, String email, String password) {
+    public SignupTask(Context context, AsyncResponse asyncResponse, String name, String email, String password) {
         delegate = asyncResponse;
-        this.username = username;
-        this.email = email;
-        this.password = password;
+        this.name = name;
         this.context = context;
     }
 
@@ -59,8 +57,8 @@ public class SignupTask extends AsyncTask<Object, Void, Object> {
 
     @Override
     protected Object doInBackground(Object... strings) {
-        if(!username.equals("") && !password.equals("")){
-            signup = new Signup(context,username,email,password).signup();
+        if(!name.equals("")){
+            signup = new Signup(context,name).signup();
         }
         return null;
     }

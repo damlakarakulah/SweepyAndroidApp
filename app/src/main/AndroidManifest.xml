@@ -11,20 +11,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="com.egeerdil.cekilisapp2.activity.MainActivity">
+        <activity android:name="com.egeerdil.cekilisapp2.activity.LoginActivity">
+
+        </activity>
+        <activity android:name="com.egeerdil.cekilisapp2.activity.StartActivity"/>
+        <activity android:name="com.egeerdil.cekilisapp2.activity.SignupActivity">
+        </activity>
+
+        <activity android:name="com.egeerdil.cekilisapp2.activity.FirebaseActivity">
+        </activity>
+        <activity android:name=".activity.SplashActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.egeerdil.cekilisapp2.activity.StartActivity"/>
-        <activity android:name="com.egeerdil.cekilisapp2.activity.SignupActivity"/>
+
+
+
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+
     </application>
+
 
 </manifest>

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.egeerdil.cekilisapp2.db.ServiceConfig;
 import com.egeerdil.cekilisapp2.task.AsyncResponse;
 import com.egeerdil.cekilisapp2.task.SetFavTask;
 import com.egeerdil.cekilisapp2.R;
@@ -31,6 +32,7 @@ import java.util.List;
 public class LotteryAdapter extends RecyclerView.Adapter<LotteryAdapter.LotterHolder> {
     public List<Lottery> myDataset;
     public Context context;
+    private Toast toast;
 
     public void UpdateData(List<Lottery> lotteryList) {
         this.myDataset = lotteryList;
@@ -112,7 +114,7 @@ public class LotteryAdapter extends RecyclerView.Adapter<LotteryAdapter.LotterHo
                 }
             });
 
-            if(StartActivity.Current.activeFragment != null && (StartActivity.Current.activeFragment.getTag().equals("Favorite") || StartActivity.Current.activeFragment.getTag().equals("Profile"))){
+            if(StartActivity.Current.activeFragment != null && (StartActivity.Current.activeFragment.getTag().equals("Favorite") || StartActivity.Current.activeFragment.getTag().equals("Menu"))){
                 StartActivity.Current.bottomNavigationView.setSelectedItemId(-1);
             }
             refresh = true;
@@ -123,9 +125,23 @@ public class LotteryAdapter extends RecyclerView.Adapter<LotteryAdapter.LotterHo
 
 
             this.saveButton.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
+                    if(!ServiceConfig.getConnectivityStatusBoolean(context)){
+                        toast = Toast.makeText(context,"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG);
+                        toast.show();
+                        return;
+                    }
+
+                    if(toast != null){
+                        toast.cancel();
+                    }
+
+                    if(ServiceConfig.Token == null){
+                        Toast.makeText(context, "Favorilere ekleme yapmak için kullanıcı girişi yapılmış olmalı.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
                     saveButton.setSelected(!saveButton.isSelected());
                     SetFavTask setFavTask = new SetFavTask(context, new AsyncResponse() {
                         @Override

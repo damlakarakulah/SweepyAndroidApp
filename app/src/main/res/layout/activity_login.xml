@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pink"
-    android:gravity="center"
-    tools:context="com.egeerdil.cekilisapp2.activity.MainActivity">
+    tools:context=".activity.LoginActivity">
 
     <com.jgabrielfreitas.core.BlurImageView
         android:id="@+id/BlurImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"
         android:src="@drawable/clouds"
         android:visibility="visible"
@@ -23,10 +20,8 @@
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/likes2" />
+        android:src="@drawable/likes2"
+        android:scaleType="centerCrop" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,11 +32,12 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="175dp"
+            android:layout_marginTop="50dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.471"
             app:srcCompat="@drawable/sweepy" />
 
         <LinearLayout
@@ -62,12 +58,13 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30sp"
                 android:layout_marginBottom="5sp"
-                android:drawableStart="@drawable/user_icon"
-                android:drawablePadding="2dp"
+                android:drawableStart="@drawable/email"
+                android:drawablePadding="8dp"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Kullanıcı adı"
-                android:inputType="text"
+                android:hint="E-posta"
+                android:includeFontPadding="true"
+                android:inputType="textEmailAddress"
                 android:textColor="#FFFFFF"
                 android:textColorHighlight="#FFFFFF"
                 android:textColorHint="#FFFFFF"
@@ -104,17 +101,56 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/signUp"
+            <Button
+                android:id="@+id/noLoginContinue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="end"
-                android:text="@string/signup"
-                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:text="GİRİŞ YAPMADAN DEVAM ET"
+                android:textColor="@color/pink"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/forgotpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.5"
+                    android:gravity="start"
+                    android:text="@string/forgotPsssword"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/signUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:text="@string/signup"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</RelativeLayout>
+    <!--include android:id="@+id/activity_firebase_ui"
+        android:visibility="gone"
+        layout="@layout/activity_firebase_ui"/!-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

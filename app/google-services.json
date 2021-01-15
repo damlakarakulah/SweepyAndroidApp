@@ -14,6 +14,43 @@
       },
       "oauth_client": [
         {
+          "client_id": "904722952867-egc4kesd3gf1unh45v1mp2fpg2uudqas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.egeerdil.cekilisapp2",
+            "certificate_hash": "1b874c33531dbd2fb92a962c274f388bfe95b051"
+          }
+        },
+        {
+          "client_id": "904722952867-27psa7plneu2k5fdu0i760kpg712ml7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClT9mfZPEFy6lXBNzBH1PSdKD0dmx2_cs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904722952867-27psa7plneu2k5fdu0i760kpg712ml7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904722952867:android:64604c8cd6c866c3e28516",
+        "android_client_info": {
+          "package_name": "com.egeerdil.devcekilisapp2"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "904722952867-27psa7plneu2k5fdu0i760kpg712ml7n.apps.googleusercontent.com",
           "client_type": 3
         }

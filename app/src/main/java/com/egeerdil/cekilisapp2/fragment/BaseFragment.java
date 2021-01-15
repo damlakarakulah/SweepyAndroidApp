@@ -2,7 +2,6 @@ package com.egeerdil.cekilisapp2.fragment;
 
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -14,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.egeerdil.cekilisapp2.Config;
-import com.egeerdil.cekilisapp2.activity.MainActivity;
+import com.egeerdil.cekilisapp2.activity.LoginActivity;
+import com.egeerdil.cekilisapp2.activity.SignupActivity;
 import com.egeerdil.cekilisapp2.db.ServiceConfig;
 import com.egeerdil.cekilisapp2.model.User;
 import com.egeerdil.cekilisapp2.task.UserInfoTask;
@@ -36,6 +36,7 @@ import com.egeerdil.cekilisapp2.adapter.LotteryAdapter;
 import com.egeerdil.cekilisapp2.model.Lottery;
 import com.egeerdil.cekilisapp2.task.AsyncResponse;
 import com.egeerdil.cekilisapp2.task.LotteryTask;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -62,9 +63,9 @@ public abstract class BaseFragment extends Fragment {
     private String headerName;
     private ImageButton favoriteButton;
     public TextView infoLabel;
-    private ImageButton profileButton;
-    private CardView profile_label;
-    private LinearLayout profile_frame;
+    private ImageButton menuButton;
+    private CardView menu_label;
+    private ScrollView menu_frame;
     public static  BaseFragment instance;
     private static ProgressDialog loadingDialog;
     private ImageButton logoutButton;
@@ -73,6 +74,11 @@ public abstract class BaseFragment extends Fragment {
     private JSONArray lotteryArray;
     private List<Lottery> lotteryList;
     private SharedPreferences sharedPref;
+    private FrameLayout loginFrame;
+    private FrameLayout logoutFrame;
+    private Toast toast;
+    private Button loginButton;
+    private Button signupButton;
 
 
     public BaseFragment(String type, String headerName){
@@ -114,21 +120,25 @@ public abstract class BaseFragment extends Fragment {
         header = view.findViewById(R.id.header);
         infoLabel = view.findViewById(R.id.info_label);
         favoriteButton = view.findViewById(R.id.favoriteButton);
-        profileButton = view.findViewById(R.id.profile_button);
+        menuButton = view.findViewById(R.id.menu_button);
         logoutButton = view.findViewById(R.id.logout_button);
         username = view.findViewById(R.id.username_profile);
         email = view.findViewById(R.id.email_profile);
         header.setText(headerName);
         StartActivity.Current.activeFragment = this;
-        profile_label = view.findViewById(R.id.profile_label);
-        profile_frame = view.findViewById(R.id.profile_layout);
-        profile_frame.setVisibility(View.GONE);
-        profile_label.setVisibility(View.GONE);
+        menu_label = view.findViewById(R.id.menu_label);
+        menu_frame = view.findViewById(R.id.menu_layout);
+        menu_frame.setVisibility(View.GONE);
+        menu_label.setVisibility(View.GONE);
+        loginFrame = view.findViewById(R.id.logMenu);
+        logoutFrame = view.findViewById(R.id.logoutMenu);
+        loginButton = view.findViewById(R.id.loginMenu);
+        signupButton = view.findViewById(R.id.signinMenu);
 
-        profileButton.setOnClickListener(new View.OnClickListener() {
+        menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StartActivity.Current.changeFragment(ProfileFragment.newInstance(), "Profile", "ProfileFragment", null);
+                StartActivity.Current.changeFragment(MenuFragment.newInstance(), "Menu", "MenuFragment", null);
             }
         });
         favoriteButton.setOnClickListener(new View.OnClickListener() {
@@ -138,8 +148,8 @@ public abstract class BaseFragment extends Fragment {
             }
         });
 
-        if(StartActivity.Current.activeFragment.getTag().equals("Profile")) {
-            UserInfoTaskForProfile();
+        if(StartActivity.Current.activeFragment.getTag().equals("Menu")) {
+            UserInfoTaskForMenu();
             return;
         }
 
@@ -158,35 +168,73 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    private void UserInfoTaskForProfile(){
+    private void UserInfoTaskForMenu(){
+
+        if(ServiceConfig.Token == null){
+            loginFrame.setVisibility(View.VISIBLE);
+            logoutFrame.setVisibility(View.GONE);
+
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent mainIntent = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(mainIntent);
+                    getActivity().finish();
+                }
+            });
+
+            signupButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent mainIntent = new Intent(getActivity(), SignupActivity.class);
+                    getActivity().startActivity(mainIntent);
+                    getActivity().finish();
+                }
+            });
+            menu_frame.setVisibility(View.VISIBLE);
+            menu_label.setVisibility(View.VISIBLE);
+            return;
+        }
+        else {
+            loginFrame.setVisibility(View.GONE);
+            logoutFrame.setVisibility(View.VISIBLE);
+        }
+
         UserInfoTask userInfoTask = new UserInfoTask(getContext(), new AsyncResponse() {
             @Override
             public void processFinish(Object output) {
                 if(output == null){
                     if(!ServiceConfig.getConnectivityStatusBoolean(getActivity())){
-                        Toast.makeText(getActivity(),"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG).show();
+                        toast = Toast.makeText(getActivity(),"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG);
+                        toast.show();
                         return;
                     }
                 }
 
+                if(toast != null)
+                    toast.cancel();
+
                 User user = (User)(output);
                 Config.user = user;
-                username.setText(Config.user.getUsername());
-                email.setText(Config.user.getEmail());
+                username.setText(Config.user.getName());
+                email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 logoutButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString("password", "");
-                        editor.apply();
-
-                        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                        try {
+                            firebaseAuth.signOut();
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        Intent mainIntent = new Intent(getActivity(), LoginActivity.class);
                         getActivity().startActivity(mainIntent);
                         getActivity().finish();
                     }
                 });
-                profile_frame.setVisibility(View.VISIBLE);
-                profile_label.setVisibility(View.VISIBLE);
+                menu_frame.setVisibility(View.VISIBLE);
+                menu_label.setVisibility(View.VISIBLE);
                 return;
             }
         });
@@ -195,17 +243,26 @@ public abstract class BaseFragment extends Fragment {
 
     private void UserInfoTask(){
         infoLabel.setVisibility(View.GONE);
-        UserInfoTask userInfoTask = new UserInfoTask(getContext(), new AsyncResponse() {
+        if(ServiceConfig.Token == null){
+            infoLabel.setText("Favori listesi oluşturmak için kullanıcı girişi yapabilirsin!");
+            infoLabel.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setVisibility(View.GONE);
+            return;
+        }
+            UserInfoTask userInfoTask = new UserInfoTask(getContext(), new AsyncResponse() {
             @Override
             public void processFinish(Object output) {
                 if(output == null){
                     if(!ServiceConfig.getConnectivityStatusBoolean(getActivity())){
-                        Toast.makeText(getActivity(),"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG).show();
+                        toast = Toast.makeText(getActivity(),"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG);
+                        toast.show();
                         isRefresh = false;
                         swipeRefreshLayout.setRefreshing(false);
                         return;
                     }
                 }
+                if(toast != null)
+                    toast.cancel();
                 isRefresh = false;
                 swipeRefreshLayout.setRefreshing(false);
                 User user = (User)(output);
@@ -214,7 +271,7 @@ public abstract class BaseFragment extends Fragment {
                 if(lotteries != null){
                     Config.lotteryList = lotteries;
                     if(Config.lotteryList.size() == 0){
-                        infoLabel.setText("Henüz hiç favoriniz yok.");
+                        infoLabel.setText("Henüz hiç favorin yok.");
                         infoLabel.setVisibility(View.VISIBLE);
                     }
                     lotteryAdapter.UpdateData(lotteries);
@@ -275,13 +332,16 @@ public abstract class BaseFragment extends Fragment {
 
                 if(output == null){
                     if(!ServiceConfig.getConnectivityStatusBoolean(getActivity())){
-                        Toast.makeText(getActivity(),"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG).show();
-
+                        toast = Toast.makeText(getActivity(),"İnternet bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG);
+                        toast.show();
                         isRefresh = false;
                         swipeRefreshLayout.setRefreshing(false);
                         return;
                     }
                 }
+
+                if(toast != null)
+                    toast.cancel();
 
                 JSONObject lotteryObject = (JSONObject)output;
 

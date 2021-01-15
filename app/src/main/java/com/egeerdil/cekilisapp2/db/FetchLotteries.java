@@ -68,6 +68,11 @@ public class FetchLotteries {
             JSONObject jsonObject2 = null;
 
             System.out.println(url);
+
+            if(ServiceConfig.Token == null){
+                this.url += "NoLogin";
+            }
+
             if(type.equals("Home"))
                 jsonObject2 = callService.getService(params,"GET",url);
             else

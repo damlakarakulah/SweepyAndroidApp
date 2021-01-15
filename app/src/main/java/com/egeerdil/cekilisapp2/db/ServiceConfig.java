@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 import android.text.Editable;
 import android.webkit.CookieManager;
 
+import com.egeerdil.cekilisapp2.BuildConfig;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,7 +22,7 @@ import okhttp3.OkHttpClient;
 
 public class ServiceConfig {
 
-    public static String serviceURL ="https://shrouded-escarpment-40589.herokuapp.com/";
+    public static String serviceURL = BuildConfig.MAINURI;
     public static OkHttpClient httpclient;
     public static Boolean closedConnection=false;
     public static String Token;
