@@ -71,6 +71,19 @@ public class LoginActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("MySharedPref",
                 MODE_PRIVATE);
 
+        if(firebaseAuth != null){
+            firebaseAuth.addIdTokenListener(new FirebaseAuth.IdTokenListener() {
+                @Override
+                public void onIdTokenChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    firebaseAuth.getCurrentUser().getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<GetTokenResult> task) {
+                            ServiceConfig.Token = task.getResult().getToken();
+                        }
+                    });
+                }
+            });
+        }
 
         continueWithoutLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +166,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(context, "İnternet bağlantınızı kontrol ediniz.", Toast.LENGTH_LONG).show();
                 }
                 else {
+                    Toast.makeText(context, "Bekleyiniz...", Toast.LENGTH_LONG).show();
+
                     firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -180,6 +195,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(LoginActivity.this, "Giriş yapılamadı. E-posta adresi veya şifreniz hatalı.",
                                         Toast.LENGTH_SHORT).show();
+                                ServiceConfig.Token = null;
                                 // ...
                             }
                         }
