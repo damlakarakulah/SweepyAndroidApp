@@ -104,12 +104,12 @@ public class LotteryAdapter extends RecyclerView.Adapter<LotteryAdapter.LotterHo
                 @Override
                 public void onClick(View v) {
                     try {
-                        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(lottery.getLink())));
+                        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(lottery.getLink().trim())));
                         StartActivity.Current.startActivity(browse);
                     }
                     catch (Exception e){
                         e.printStackTrace();
-                        Toast.makeText(context,"Link kaldırılmıştır",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Linke ulaşılamıyor.",Toast.LENGTH_SHORT).show();
                     }
                 }
             });

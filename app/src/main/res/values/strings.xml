@@ -3,6 +3,8 @@
     <string name="login"><u>Giriş Sayfasına Dön</u></string>
     <string name="continueWithoutToken">Giriş Yapmadan Devam Et</string>
     <string name="forgotPsssword"><u>Şifremi Unuttum</u></string>
+    <string name="mail"><u>sweepyapp@gmail.com</u></string>
+    <string name="about_us">Sweepy, çeşitli kurum veya kişilerin düzenlediği çekilişleri tek bir platformda görebilmen ve onlara kolayca ulaşabilmen için tasarlandı. Kategorilere göre filtrelediğimiz çekilişleri favorilerine ekle ve kendi listeni oluştur. Çekilişlere ulaşmak hiç bu kadar kolay olmamıştı!</string>
 
 
 </resources>
