@@ -75,7 +75,9 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.addIdTokenListener(new FirebaseAuth.IdTokenListener() {
                 @Override
                 public void onIdTokenChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    firebaseAuth.getCurrentUser().getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    if(firebaseUser == null)
+                        return;
+                    firebaseUser.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                         @Override
                         public void onComplete(@NonNull Task<GetTokenResult> task) {
                             ServiceConfig.Token = task.getResult().getToken();
