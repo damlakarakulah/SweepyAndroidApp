@@ -95,7 +95,13 @@ public class Connection {
                     String responseText = response.body().string();
                     Log.d("Response", responseText);
                     jsonObject = new JSONObject(responseText);
-                } else
+                } else if(response.code() == 401) {
+                    responseText = response.body().string();
+                    Log.d("Response", responseText);
+                    response.body().close();
+                    Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                }
+                else
                     jsonObject = null;
 
             } catch (JSONException e) {
@@ -126,7 +132,14 @@ public class Connection {
 
                     jsonObject = new JSONObject(responseText);
 
-                } else
+                }
+                else if(response.code() == 401) {
+                    responseText = response.body().string();
+                    Log.d("Response", responseText);
+                    response.body().close();
+                    Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                }
+                else
                     jsonObject = null;
 
             } catch (JSONException e) {
@@ -156,10 +169,17 @@ public class Connection {
                     Log.d("Response", responseText);
                     response.body().close();
                     jsonObject = new JSONObject(responseText);
-                } else {
+                } else if(response.code() == 401) {
+                    responseText = response.body().string();
+                    Log.d("Response", responseText);
+                    response.body().close();
+                    Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                }
+                else{
                     jsonObject = null;
                     System.out.println("not successful");
                 }
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -193,7 +213,14 @@ public class Connection {
                     Log.d("Response", responseText);
                     response.body().close();
                     jsonObject = new JSONObject(responseText);
-                } else {
+                }
+                else if(response.code() == 401) {
+                    responseText = response.body().string();
+                    Log.d("Response", responseText);
+                    response.body().close();
+                    Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                }
+                else {
                     jsonObject = null;
                 }
 
