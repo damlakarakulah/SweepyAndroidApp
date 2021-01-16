@@ -190,7 +190,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
                             android:gravity="center"
-                            android:text="Sweepy, çeşitli kurum veya kişilerin düzenlediği çekilişleri tek bir platformda görebilmen ve kolayca ulaşabilmen için tasarlandı. Kategorilere göre filtrelediğimiz çekilişleri favorilerine ekle ve kendi listeni oluştur. Çekilişlere ulaşmak hiç bu kadar kolay olmamıştı!"
+                            android:text="@string/about_us"
                             android:textSize="18sp" />
                     </LinearLayout>
                 </FrameLayout>
@@ -198,8 +198,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp
-">
+                    android:layout_marginTop="50dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -216,11 +215,11 @@
                             android:textSize="24sp" />
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/reachUs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="destek@sweepy.com"
+                            android:text="@string/mail"
                             android:textSize="18sp" />
                     </LinearLayout>
                 </FrameLayout>
