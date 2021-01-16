@@ -4,6 +4,7 @@ package com.egeerdil.cekilisapp2.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -79,6 +80,7 @@ public abstract class BaseFragment extends Fragment {
     private Toast toast;
     private Button loginButton;
     private Button signupButton;
+    private TextView reachUs;
 
 
     public BaseFragment(String type, String headerName){
@@ -134,6 +136,7 @@ public abstract class BaseFragment extends Fragment {
         logoutFrame = view.findViewById(R.id.logoutMenu);
         loginButton = view.findViewById(R.id.loginMenu);
         signupButton = view.findViewById(R.id.signinMenu);
+        reachUs = view.findViewById(R.id.reachUs);
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,6 +221,17 @@ public abstract class BaseFragment extends Fragment {
                 Config.user = user;
                 username.setText(Config.user.getName());
                 email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                reachUs.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+                        intent.setData(Uri.parse("mailto:sweepyapp@gmail.com")); // or just "mailto:" for blank
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+                        startActivity(intent);
+                    }
+                });
+
+
                 logoutButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
