@@ -46,8 +46,8 @@ android {
         }
         prodEnvironment{
             applicationId "com.egeerdil.cekilisapp2"
-            versionCode 106
-            versionName "1.0.6"
+            versionCode 108
+            versionName "1.0.8"
             buildConfigField "String", "MAINURI", '"https://shrouded-escarpment-40589.herokuapp.com/"'
             buildConfigField "String" ,"VERSIONTEXT" ,'"Versiyon: "'
             resValue "string" , "app_name" , '"Sweepy"'
