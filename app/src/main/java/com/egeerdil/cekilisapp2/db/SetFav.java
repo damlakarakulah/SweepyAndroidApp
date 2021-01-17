@@ -1,6 +1,7 @@
 package com.egeerdil.cekilisapp2.db;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -37,7 +38,10 @@ public class SetFav {
             params.put("_id", _id);
             params.put("isFaved", isFaved);
             setFaved = callService.getService(params,"PUT",url);
-
+            if(ServiceConfig.responseCode == 401) {
+                Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                return null;
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

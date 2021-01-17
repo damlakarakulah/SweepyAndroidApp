@@ -1,6 +1,7 @@
 package com.egeerdil.cekilisapp2.db;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.egeerdil.cekilisapp2.Config;
 import com.egeerdil.cekilisapp2.model.Lottery;
@@ -36,6 +37,10 @@ public class FetchLotteries {
             url = ServiceConfig.serviceURL + "lottery";
             JSONObject params = new JSONObject();
             callService = new CallService(this.context);
+            if(ServiceConfig.responseCode == 401) {
+                Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                return null;
+            }
             if(type.equals("Home")) {
                 url = ServiceConfig.serviceURL + "lottery";
                 this.url += "/getAllLotteries";

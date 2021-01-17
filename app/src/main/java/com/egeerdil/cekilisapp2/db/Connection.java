@@ -4,6 +4,7 @@ package com.egeerdil.cekilisapp2.db;
 import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.egeerdil.cekilisapp2.SweepyApplication;
@@ -94,12 +95,13 @@ public class Connection {
                 if (response.isSuccessful() && response.code() == 200) {
                     String responseText = response.body().string();
                     Log.d("Response", responseText);
+                    ServiceConfig.responseCode = 200;
                     jsonObject = new JSONObject(responseText);
                 } else if(response.code() == 401) {
                     responseText = response.body().string();
                     Log.d("Response", responseText);
                     response.body().close();
-                    Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                    ServiceConfig.responseCode = 401;
                 }
                 else
                     jsonObject = null;
@@ -129,7 +131,7 @@ public class Connection {
                 if (response.isSuccessful() && response.code() == 200) {
                     String responseText = response.body().string();
                     Log.d("Response", responseText); //
-
+                    ServiceConfig.responseCode = 200;
                     jsonObject = new JSONObject(responseText);
 
                 }
@@ -137,7 +139,8 @@ public class Connection {
                     responseText = response.body().string();
                     Log.d("Response", responseText);
                     response.body().close();
-                    Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                    ServiceConfig.responseCode = 401;
+                    //Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
                 }
                 else
                     jsonObject = null;
@@ -168,12 +171,14 @@ public class Connection {
                     responseText = response.body().string();
                     Log.d("Response", responseText);
                     response.body().close();
+                    ServiceConfig.responseCode = 200;
                     jsonObject = new JSONObject(responseText);
                 } else if(response.code() == 401) {
                     responseText = response.body().string();
                     Log.d("Response", responseText);
                     response.body().close();
-                    Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                    ServiceConfig.responseCode = 401;
+                    //Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
                 }
                 else{
                     jsonObject = null;
@@ -212,13 +217,15 @@ public class Connection {
                     responseText = response.body().string();
                     Log.d("Response", responseText);
                     response.body().close();
+                    ServiceConfig.responseCode = 200;
                     jsonObject = new JSONObject(responseText);
                 }
                 else if(response.code() == 401) {
                     responseText = response.body().string();
                     Log.d("Response", responseText);
                     response.body().close();
-                    Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                    ServiceConfig.responseCode = 401;
+                    //Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
                 }
                 else {
                     jsonObject = null;

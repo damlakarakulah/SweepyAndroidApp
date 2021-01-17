@@ -26,6 +26,7 @@ public class ServiceConfig {
     public static OkHttpClient httpclient;
     public static Boolean closedConnection=false;
     public static String Token;
+    public static int responseCode;
 
     private static Boolean hasHttpsService = false;
 
