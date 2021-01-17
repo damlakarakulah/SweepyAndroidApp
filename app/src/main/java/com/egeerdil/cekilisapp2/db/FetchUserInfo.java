@@ -1,6 +1,7 @@
 package com.egeerdil.cekilisapp2.db;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.egeerdil.cekilisapp2.Config;
 import com.egeerdil.cekilisapp2.model.Lottery;
@@ -42,6 +43,10 @@ public class FetchUserInfo {
             JSONObject jsonObject = callService.getService(params, "GET", url);
             if(jsonObject == null)
                 return null;
+            if(ServiceConfig.responseCode == 401) {
+                Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                return null;
+            }
             userObject = jsonObject.getJSONObject("user");
             user = gson.fromJson(userObject.toString(), User.class);
             lotteryArray = userObject.getJSONArray("favs");

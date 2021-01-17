@@ -1,5 +1,6 @@
 package com.egeerdil.cekilisapp2.db;
 import android.content.Context;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -35,6 +36,10 @@ public class Signup {
         try {
             params.put("name", name);
             signupObject = callService.getService(params, "POST", url);
+            if(ServiceConfig.responseCode == 401) {
+                Toast.makeText(context, "Oturum sonlandırıldı. Tekrar giriş yapınız.", Toast.LENGTH_LONG).show();
+                return null;
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
