@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@drawable/clouds2"
+    android:background="@mipmap/clouds2"
     tools:context=".activity.SplashActivity">
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_base"/>
+        android:src="@mipmap/logo_base"/>
 </LinearLayout>

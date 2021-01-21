@@ -72,7 +72,7 @@ public class FirebaseActivity extends AppCompatActivity {
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
-                        .setLogo(R.drawable.sweepy_copy)
+                        .setLogo(R.drawable.sweepy)
                         .setTheme(R.style.LoginTheme)
                         .build(),
                 RC_SIGN_IN);
